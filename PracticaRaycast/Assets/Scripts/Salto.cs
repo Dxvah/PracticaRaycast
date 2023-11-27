@@ -6,6 +6,7 @@ public class Salto : MonoBehaviour
 {
     Rigidbody rb;
     bool isGrounded;
+    public GameObject cube;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -16,7 +17,7 @@ public class Salto : MonoBehaviour
     {
         Vector3 origen = transform.position;
         Vector3 direccion = -transform.up;
-        // Vecto3.down
+        
         RaycastHit col;
         if (Physics.Raycast(origen, direccion, out col, 0.5f))
         {
@@ -33,7 +34,14 @@ public class Salto : MonoBehaviour
     void Jump()
     {
         // TODO: Parametrizar esto!
-        rb.AddForce(transform.up * 30);
+        
         isGrounded = false;
+    }
+    void OnDrawGizmos()
+    {
+        Vector3 origen = cube.transform.position;
+        Vector3 direccion = -cube.transform.up;
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(origen, direccion * 2);
     }
 }
